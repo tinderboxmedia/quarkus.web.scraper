@@ -16,12 +16,12 @@ pipeline {
         stage('Package') {
             agent {
                 docker {
-                    image 'maven:3-eclipse-temurin-21-alpine'
-                    args '-v /root/.m2:/root/.m2'
+                    image 'vegardit/graalvm-maven:latest-java21'
+                    args '-u root'
                 }
             }
             steps {
-                sh 'mvn install -Dnative -Dquarkus.native.container-build=true -Dquarkus.native.container-runtime=docker'
+                sh 'mvn -B -ntp clean install -Dnative'
             }
         }
         
@@ -49,6 +49,7 @@ pipeline {
         stage('Clean') {
             steps {
                 sh 'docker system prune -af'
+                cleanWs()
             }
         }
 
