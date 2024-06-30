@@ -16,7 +16,7 @@ pipeline {
         stage('Package') {
             agent {
                 docker {
-                    image 'vegardit/graalvm-maven:latest-java21'
+                    image 'vegardit/graalvm-maven:latest-java21' // See if we can use official image and use mvnd?
                     args '-u root'
                 }
             }
