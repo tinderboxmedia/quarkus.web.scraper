@@ -20,4 +20,4 @@ Soon...
 
 ## Creating a native executable
 
-You can let the Jenkins pipeline handle that. Just push your changes to the GitHub repo.
+You can let the Jenkins pipeline manage that. Just push your changes to the GitHub repo.
