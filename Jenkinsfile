@@ -4,6 +4,8 @@ pipeline {
         PROJECT_NAME = readMavenPom().getArtifactId()
         PROJECT_VERSION = readMavenPom().getVersion()
         
+        MAVEN_DOWNLOAD_URL = "https://dlcdn.apache.org/maven/maven-3/3.9.8/binaries/apache-maven-3.9.8-bin.tar.gz"
+        
         NEXUS_URL = 'http://nexus:9000/repository/docker-images/'
         NEXUS_CRED = 'nexus-credentials'
         
@@ -16,12 +18,14 @@ pipeline {
         stage('Package') {
             agent {
                 docker {
-                    image 'vegardit/graalvm-maven:latest-java21' // See if we can use official image and use mvnd?
-                    args '-u root'
+                    image 'quay.io/quarkus/ubi-quarkus-graalvmce-builder-image:jdk-21'
+                    args '-u root --entrypoint='
                 }
             }
             steps {
-                sh 'mvn -B -ntp clean install -Dnative'
+                sh 'mkdir /opt/maven'
+                sh "curl -fL ${MAVEN_DOWNLOAD_URL} --silent | tar zx -C /opt/maven --strip-components=1"
+                sh '/opt/maven/bin/mvn -B -ntp clean install -Dnative'
             }
         }
         
@@ -45,14 +49,12 @@ pipeline {
                 }
             }
         }
-        
-        stage('Clean') {
-            steps {
-                sh 'docker system prune -af'
-                cleanWs()
-            }
+    }
+    post { 
+        always { 
+            sh 'docker system prune -af'
+            cleanWs()
         }
-
     }
     options {
         skipStagesAfterUnstable()
