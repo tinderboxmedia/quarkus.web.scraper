@@ -1,21 +1,7 @@
 package media.tinderbox.service.authentication;
 
-import io.quarkus.logging.Log;
-import io.quarkus.runtime.Startup;
-import jakarta.inject.Singleton;
-import java.io.File;
+public sealed interface AuthKeyGenerator permits AuthKeyGeneratorDev, AuthKeyGeneratorProd {
 
-@Startup
-@Singleton
-public class AuthKeyGenerator {
+    public String getAuthKey();
 
-    private final String authKey;
-
-    public AuthKeyGenerator() {
-        this.authKey = "23456";
-    }
-
-    public String getAuthKey() {
-        return authKey;
-    }
 }
