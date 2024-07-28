@@ -4,6 +4,9 @@ import io.quarkus.arc.profile.IfBuildProfile;
 import io.quarkus.runtime.Startup;
 import jakarta.inject.Singleton;
 
+import java.io.File;
+import java.nio.file.Files;
+
 @Startup
 @Singleton
 @IfBuildProfile("prod")
@@ -13,7 +16,16 @@ public final class AuthKeyGeneratorProd implements AuthKeyGenerator {
 
     public AuthKeyGeneratorProd() {
         String currentDir = System.getProperty("user.dir");
-        this.authKey = "saved-and-secured-key - " + currentDir;
+        File authSecret = new File(currentDir, "auth/authSecret.txt");
+
+        String authSecretPath = authSecret.getAbsolutePath();
+
+        // if empty
+            // add secret key
+        // else
+            // read in key
+
+        this.authKey = "saved-and-secured-key - " + authSecretPath;
     }
 
     public String getAuthKey() {
