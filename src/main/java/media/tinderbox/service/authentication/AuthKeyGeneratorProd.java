@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -45,7 +48,7 @@ public final class AuthKeyGeneratorProd implements AuthKeyGenerator {
         // Content
         if (authSecret.length() == 0) {
             try (FileWriter writer = new FileWriter(authSecret.getAbsolutePath())) {
-                String randomAuthKey = "RandomKey123";
+                String randomAuthKey = generateSafeToken();
                 writer.write(randomAuthKey);
                 this.authKey = randomAuthKey;
                 Log.info("Random authKey written to authentication file.");
@@ -68,5 +71,16 @@ public final class AuthKeyGeneratorProd implements AuthKeyGenerator {
 
     public String getAuthKey() {
         return authKey;
+    }
+
+    private String generateSafeToken() {
+        // Generate
+        SecureRandom random = new SecureRandom();
+        byte[] bytes = new byte[32];
+        random.nextBytes(bytes);
+
+        // Make readable
+        Base64.Encoder encoder = Base64.getUrlEncoder().withoutPadding();
+        return encoder.encodeToString(bytes);
     }
 }
