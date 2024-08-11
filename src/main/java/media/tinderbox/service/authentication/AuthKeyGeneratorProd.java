@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.NoSuchElementException;
@@ -42,7 +41,7 @@ public final class AuthKeyGeneratorProd implements AuthKeyGenerator {
                 Log.info("Authentication file is already present.");
             }
         } catch (IOException exception) {
-            Log.warn("Issue with creating authentication file.");
+            Log.warn("Issue with creating authentication file: " + exception.getMessage());
         }
 
         // Content
@@ -52,8 +51,8 @@ public final class AuthKeyGeneratorProd implements AuthKeyGenerator {
                 writer.write(randomAuthKey);
                 this.authKey = randomAuthKey;
                 Log.info("Random authKey written to authentication file.");
-            } catch (IOException e) {
-                Log.warn("Issue with writing to authentication file.");
+            } catch (IOException exception) {
+                Log.warn("Issue with writing to authentication file: " + exception.getMessage());
             }
         } else {
             try (Scanner scanner = new Scanner(authSecret)) {
@@ -61,7 +60,7 @@ public final class AuthKeyGeneratorProd implements AuthKeyGenerator {
                 Log.info("Existing authKey read from authentication file.");
                 scanner.nextLine();
             } catch (NoSuchElementException | FileNotFoundException exception) {
-                Log.warn("Issue with reading from authentication file.");
+                Log.warn("Issue with reading from authentication file: " + exception.getMessage());
             }
         }
 
