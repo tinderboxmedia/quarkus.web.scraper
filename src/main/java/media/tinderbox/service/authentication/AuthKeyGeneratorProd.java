@@ -58,7 +58,6 @@ public final class AuthKeyGeneratorProd implements AuthKeyGenerator {
             try (Scanner scanner = new Scanner(authSecret)) {
                 this.authKey = scanner.nextLine();
                 Log.info("Existing authKey read from authentication file.");
-                scanner.nextLine();
             } catch (NoSuchElementException | FileNotFoundException exception) {
                 Log.warn("Issue with reading from authentication file: " + exception.getMessage());
             }
