@@ -18,6 +18,20 @@ Soon...
 
 Soon...
 
+## Example Calls
+
+Example CURL to call the GET endpoint:
+
+```shell script
+curl -H "x-api-key:key123" -v http://localhost:8080/scrape
+```
+
+Example CURL to call the POST endpoint:
+
+```shell script
+curl -X POST -H "x-api-key:key123" -H "Content-Type: application/json" -d "{}" -v http://localhost:8080/scrape
+```
+
 ## Creating a native executable
 
 You can let the Jenkins pipeline manage that. Just push your changes to the GitHub repo.
