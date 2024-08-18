@@ -5,6 +5,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import media.tinderbox.data.SearchBody;
 import media.tinderbox.service.scraper.ScrapingService;
 
 @Path("/scrape")
@@ -23,9 +24,9 @@ public class ScrapeController {
     }
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
-    public String scrape(Object object) {
-        return scrapingService.scrapeContent();
+    @Produces(MediaType.TEXT_HTML)
+    public String scrape(SearchBody searchBody) {
+        return scrapingService.scrapeContent(searchBody);
     }
 
 }

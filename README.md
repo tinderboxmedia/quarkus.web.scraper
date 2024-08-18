@@ -23,13 +23,13 @@ Soon...
 Example CURL to call the GET endpoint:
 
 ```shell script
-curl -H "x-api-key:key123" -v http://localhost:8080/scrape
+curl -v -H "x-api-key:key123" http://localhost:8080/scrape
 ```
 
 Example CURL to call the POST endpoint:
 
 ```shell script
-curl -X POST -H "x-api-key:key123" -H "Content-Type: application/json" -d "{}" -v http://localhost:8080/scrape
+curl -v -H "x-api-key:key123" -H "Content-Type: application/json" -d "{\"url\":\"https://playwright.dev/java/\", \"selector\":\"text='Playwright for Java'\", \"extraWait\":500}" http://localhost:8080/scrape
 ```
 
 ## Creating a native executable

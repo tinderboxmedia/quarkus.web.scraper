@@ -12,7 +12,7 @@
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.version>3.13.2</quarkus.platform.version>
-        <quarkus-playwright.verison>1.0.0</quarkus-playwright.verison>
+        <playwright.verison>1.46.0</playwright.verison>
     </properties>
 
     <dependencyManagement>
@@ -41,9 +41,9 @@
             <artifactId>quarkus-arc</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.quarkiverse.playwright</groupId>
-            <artifactId>quarkus-playwright</artifactId>
-            <version>${quarkus-playwright.verison}</version>
+            <groupId>com.microsoft.playwright</groupId>
+            <artifactId>playwright</artifactId>
+            <version>${playwright.verison}</version>
         </dependency>
     </dependencies>
 
