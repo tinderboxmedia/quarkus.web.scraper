@@ -22,9 +22,10 @@ public class FileSystem {
      */
     public FileSystem() throws URISyntaxException, IOException {
         Log.info("Creating Resource FileSystem...");
-        FileSystems.newFileSystem(
-                new URI("resource:/"),
-                createResourceSettings());
+        // TODO: remove or enable
+//        FileSystems.newFileSystem(
+//                new URI("resource:/"),
+//                createResourceSettings());
     }
 
     private Map<String, String> createResourceSettings() {
