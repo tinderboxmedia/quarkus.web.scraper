@@ -1,7 +1,12 @@
 FROM maven:3-eclipse-temurin-21-alpine
 
-COPY target/*.jar app.jar
+WORKDIR /application/
+
+RUN chown 1001 /application \
+    && chmod "g+rwX" /application \
+    && chown 1001:root /application
+COPY --chown=1001:root target/*.jar app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","./app.jar"]
