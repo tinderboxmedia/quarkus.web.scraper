@@ -9,4 +9,4 @@ COPY --chown=1001:root target/quarkus-app/ ./
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "./application/quarkus-run.jar"]
+ENTRYPOINT ["java", "-jar", "./quarkus-run.jar"]
