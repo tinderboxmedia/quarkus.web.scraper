@@ -31,7 +31,3 @@ Example CURL to call the POST endpoint:
 ```shell script
 curl -v -H "x-api-key:key123" -H "Content-Type: application/json" -d "{\"url\":\"https://playwright.dev/java/\", \"selector\":\"text='Playwright for Java'\", \"extraWait\":500}" http://localhost:8080/scrape
 ```
-
-## Creating a native executable
-
-You can let the Jenkins pipeline manage that. Just push your changes to the GitHub repo.
