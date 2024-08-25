@@ -23,8 +23,16 @@ pipeline {
                 }
             }
             steps {
+                // Install Maven
                 sh 'mkdir /opt/maven'
                 sh "curl -fL ${MAVEN_DOWNLOAD_URL} --silent | tar zx -C /opt/maven --strip-components=1"
+                sh '/opt/maven/bin/mvn -ntp clean install'
+
+                // Get Driver Bundle
+                sh 'mkdir /driver-bundle'
+                sh "unzip -o ${WORKSPACE}/target/quarkus-app/lib/main/com.microsoft.playwright.driver-bundle-1.46.0.jar -d driver-bundle"
+
+                // Create Native
                 sh '/opt/maven/bin/mvn -B -ntp clean install -Dnative'
             }
         }
