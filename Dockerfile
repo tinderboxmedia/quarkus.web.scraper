@@ -5,8 +5,8 @@ WORKDIR /application/
 RUN chown 1001 /application \
     && chmod "g+rwX" /application \
     && chown 1001:root /application
-COPY --chown=1001:root target/*.jar app.jar
+COPY --chown=1001:root target/quarkus-app/ /quarkus-app/
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "./app.jar", "-Dquarkus.http.host=0.0.0.0"]
+ENTRYPOINT ["java", "-jar", "./quarkus-app/quarkus-run.jar.jar"]
