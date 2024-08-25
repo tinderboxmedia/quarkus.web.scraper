@@ -1,4 +1,4 @@
-FROM quay.io/quarkus/quarkus-micro-image:2.0
+FROM maven:3-eclipse-temurin-21-alpine
 
 WORKDIR /app/
 
