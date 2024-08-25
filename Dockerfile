@@ -5,7 +5,7 @@ WORKDIR /application/
 RUN chown 1001 /application \
     && chmod "g+rwX" /application \
     && chown 1001:root /application
-COPY --chown=1001:root target/*.jar app.jar
+COPY --chown=1001:root target/quarkus-app/*.jar app.jar
 
 EXPOSE 8080
 
