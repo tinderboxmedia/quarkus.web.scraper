@@ -21,7 +21,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn -B -ntp clean package'
+                sh 'mvn -B -ntp clean package -Dquarkus.profile=prod'
             }
         }
 

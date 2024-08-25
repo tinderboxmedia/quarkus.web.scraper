@@ -9,4 +9,4 @@ COPY --chown=1001:root target/*.jar app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["./app.jar", "-Dquarkus.http.host=0.0.0.0"]
+ENTRYPOINT ["java", "-jar", "./app.jar", "-Dquarkus.http.host=0.0.0.0"]
