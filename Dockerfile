@@ -9,7 +9,7 @@ RUN chown 1001 /application \
 
 COPY --chown=1001:root target/quarkus-app/ pom.xml ./
 
-RUN mvn exec:java -q -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install-deps install"
+RUN mvn exec:java -q -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps chromium"
 
 EXPOSE 8080
 
