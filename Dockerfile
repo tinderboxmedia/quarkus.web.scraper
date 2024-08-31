@@ -9,7 +9,7 @@ RUN chown 1001 /application \
 
 COPY --chown=1001:root target/quarkus-app/ ./
 
-COPY pom.xml .
+RUN mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install-deps"
 
 EXPOSE 8080
 
