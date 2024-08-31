@@ -7,7 +7,7 @@ RUN chown 1001 /application \
     && chown 1001:root /application \
     && chmod 1777 /tmp
 
-COPY --chown=1001:root target/quarkus-app/ ./
+COPY --chown=1001:root target/quarkus-app/ pom.xml ./
 
 RUN mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install-deps"
 
