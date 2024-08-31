@@ -6,9 +6,9 @@ RUN chown 1001 /application \
     && chmod "g+rwX" /application \
     && chown 1001:root /application \
 
-COPY --chown=1001:root target/quarkus-app/ ./
+COPY --chown=1001:root pom.xml .
 
-COPY pom.xml .
+COPY --chown=1001:root target/quarkus-app/ ./
 
 EXPOSE 8080
 
