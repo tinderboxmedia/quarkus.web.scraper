@@ -5,10 +5,11 @@ WORKDIR /application/
 RUN chown 1001 /application \
     && chmod "g+rwX" /application \
     && chown 1001:root /application \
-
-COPY --chown=1001:root pom.xml .
+    && chmod 1777 /tmp
 
 COPY --chown=1001:root target/quarkus-app/ ./
+
+COPY pom.xml .
 
 EXPOSE 8080
 
