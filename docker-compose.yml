@@ -1,0 +1,25 @@
+---
+version: "3.5"
+services:
+
+  # App
+  quarkus-web-scraper:
+    image: "quarkus-web-scraper:latest"
+    container_name: quarkus-web-scraper
+    restart: always
+    volumes:
+      - quarkus-web-scraper:/application/auth
+      - playwright-browsers:/root/.cache/ms-playwright
+    environment:
+      - PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+    ports:
+      # Endpoint
+      - "8080:8080"
+
+networks:
+  default:
+    name: quarkus-web-scraper
+
+volumes:
+  quarkus-web-scraper:
+  playwright-browsers:
