@@ -8,6 +8,8 @@ import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 import media.tinderbox.data.SearchBody;
 
+import java.util.List;
+
 @ApplicationScoped
 public final class ScrapingServiceImpl implements ScrapingService {
 
@@ -19,7 +21,7 @@ public final class ScrapingServiceImpl implements ScrapingService {
     public String scrapeContent(SearchBody searchBody) {
         // Store
         this.url = searchBody.url();
-        this.selector = searchBody.selector();
+        this.selector = String.join(" ", List.of(searchBody.selector(), ">> nth = 0"));
         this.extraWait = searchBody.extraWait();
         // Create
         try (Playwright playwright = Playwright.create()) {
@@ -41,7 +43,7 @@ public final class ScrapingServiceImpl implements ScrapingService {
             if (selector != null) {
                 Log.info("Waiting for: " + selector);
                 Locator locator = page.locator(selector);
-                locator.isVisible();
+                locator.waitFor();
             }
             try {
                 if (extraWait != null && extraWait != 0) {
